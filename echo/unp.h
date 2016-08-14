@@ -10,7 +10,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <sys/wait.h>
+/*
+waitpid();
+wait();
 
+*/
+
+
+
+#include <errno.h>
+/*
+erron
+*/
 
 
 #include <netinet/in.h>
@@ -45,6 +57,8 @@ struct sockaddr;  通用套接字地址结构
 void *memset(void* dest, int c, size_t len);
 void *memcpy(void* des, const void* src, size_t nbytes);
 int memcmp(const void* ptr1, const void* ptr2, size_t nbytes);
+
+strerror();
 */
 
 #include <arpa/inet.h>
@@ -59,10 +73,32 @@ inet_ntop
 */
 
 
+void err_sys(char* msg)
+{
+    fprintf(stderr, "%s: %s\n",msg,strerror(errno));
+    fflush(stderr);
+}
+
+void err_usr(char* msg)
+{
+    fprintf(stderr, "Error:%s\n",msg);
+    fflush(stderr);
+}
 
 
+void err_quit_sys(char* msg)
+{
+    fprintf(stderr,"%s: %s\n",msg,strerror(errno));
+    fflush(stderr);
+    exit(1);
+}
 
-
+void err_quit_usr(char* msg)
+{
+    fprintf(stderr,"Error:%s\n",msg);
+    fflush(stderr);
+    exit(1);
+}
 
 
 
